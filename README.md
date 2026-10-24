@@ -1,11 +1,11 @@
 ![Thai Character Classification — MobileNetV3-Large](docs/images/project-banner.svg)
 
-# ระบบจำแนกตัวอักษรไทย
+# Thai Character Classification
 
 ใช้ **MobileNetV3-Large** จำแนกพยัญชนะ สระ วรรณยุกต์ เครื่องหมาย และตัวเลขไทย
 รวม **80 คลาส** ด้วย PyTorch
 
-## ตัวอย่างตัวอักษร
+## Character Samples
 
 ตัวอักษร **ก** แบบลายมือจาก ALICE-THI และแบบตัวพิมพ์จากชุด PrintFont
 แสดงความแตกต่างของรูปทรง สัดส่วน และน้ำหนักเส้นภายในคลาสเดียวกัน
@@ -14,7 +14,7 @@
 | :---: | :---: |
 | ![ตัวอย่าง ก ลายมือ 20 ภาพจาก ALICE-THI](docs/images/ALICE_THI_kor_kai_grid.png) | ![ตัวอย่าง ก ตัวพิมพ์ในหลายรูปแบบฟอนต์](docs/images/TH_Characters_PrintFont_Large_Test_preview.png) |
 
-## เริ่มใช้งาน
+## Quick Start
 
 เลือก notebook ตามงานที่ต้องการ แล้วเปิดใน Google Colab:
 
@@ -31,7 +31,7 @@
 **ชุดข้อมูล checkpoint และฟอนต์ไม่ได้รวมอยู่ใน repository** ต้องใช้ไฟล์เดิมหรือขอจากเจ้าของข้อมูล
 ดู [ตำแหน่งไฟล์และวิธีตั้งค่า](docs/usage.md) ก่อนรัน
 
-## แนวทางการฝึก
+## Training Approach
 
 ภาพต้นฉบับมีสัดส่วนต่างกัน จึงเติมขอบสีขาวแบบ **letterbox** ให้ได้ภาพ RGB ขนาด
 **160 × 160 พิกเซล** แล้วปรับค่าพิกเซลด้วย ImageNet normalization
@@ -49,7 +49,7 @@ label smoothing `0.1` และ mixed precision บน GPU โดยกำหน
 > **การแบ่งข้อมูล:** notebook ใช้ split 80/20 ที่เตรียมไว้แล้ว โฟลเดอร์ชื่อ
 > `split_80_20/test` ทำหน้าที่เป็น **validation** ของงานนี้ ส่วนชุดทดสอบจริงของอาจารย์ใช้แยกต่างหาก
 
-## ผลประเมิน
+## Results
 
 ค่าที่บันทึกไว้ใน [model card](docs/evaluation/model_card.json):
 
@@ -68,7 +68,7 @@ Weighted F1 พร้อมรายงานรายคลาสและค�
 สำหรับชุดภายนอก **ALICE-THI ครอบคลุม 77 จาก 80 คลาส** ส่วน PrintFont เป็นภาพตัวพิมพ์ที่สร้างจากฟอนต์
 ควรรายงานผลแต่ละชุดแยกกัน ไม่รวมเป็นคะแนนเดียว
 
-## การส่งคำตอบสำหรับ Project 1
+## Project 1 Submission
 
 โมเดลจำแนก 80 คลาส แต่แม่แบบงานนี้ใช้ **72 คลาส** Notebook ส่งงานจึงกรองคำตอบตาม
 `Project_1-data_dict.csv` ก่อนเลือกคลาส แล้วเทียบชื่อภาพกับ `gt_path` ในแม่แบบ
@@ -78,7 +78,7 @@ Weighted F1 พร้อมรายงานรายคลาสและค�
 พร้อมตรวจจำนวนแถวและการจับคู่ชื่อภาพก่อนสร้าง `submission.csv`
 ดู [ขั้นตอนตั้งค่า](docs/usage.md#ตั้งค่าก่อนสร้างไฟล์ส่งคำตอบ)
 
-## โครงสร้างโครงการ
+## Project Structure
 
 ```text
 notebooks/          Notebook สำหรับฝึก ประเมิน และส่งคำตอบ
@@ -96,9 +96,18 @@ requirements.txt    ไลบรารีสำหรับรันในเค
 ชุดข้อมูล โมเดล ฟอนต์ ZIP ผลส่งคำตอบ และ notebook เก่าจะเก็บในเครื่องตาม `.gitignore`
 จึงไม่ถูกรวมเมื่อ clone โครงการ
 
----
+## Documentation
 
-**เอกสาร:** [คู่มือใช้งาน](docs/usage.md) · [ข้อมูล](data/README.md) · [โมเดล](models/README.md) · [สไลด์นำเสนอ](docs/slide_dl_presentation.pdf)
+| Document | Description |
+| :--- | :--- |
+| [Usage Guide](docs/usage.md) | วิธีติดตั้ง ตั้งค่า path รันสคริปต์ และสร้างไฟล์ส่งคำตอบ |
+| [Data Guide](data/README.md) | รายละเอียดชุดข้อมูลและตำแหน่งจัดเก็บ |
+| [Model Guide](models/README.md) | วิธีเตรียม checkpoint สำหรับใช้งาน |
+| [Model Card](docs/evaluation/model_card.json) | สถาปัตยกรรม การเตรียมภาพ และผลประเมินที่บันทึกไว้ |
+| [Training History](docs/evaluation/training_history.csv) | ค่าการฝึกราย epoch |
+| [Presentation](docs/slide_dl_presentation.pdf) | สไลด์นำเสนอโครงการ |
 
-**สิทธิ์การใช้งาน:** [MIT License](LICENSE) สำหรับโค้ดและเอกสารที่ทีมสร้าง
+## License
+
+[MIT License](LICENSE) สำหรับโค้ดและเอกสารที่ทีมสร้าง
 ส่วนข้อมูล ฟอนต์ โมเดล และเนื้อหาจากภายนอกอยู่ภายใต้ [เงื่อนไขแยก](THIRD_PARTY_NOTICES.md)
