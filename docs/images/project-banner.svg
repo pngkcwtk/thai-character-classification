@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280" role="img" aria-labelledby="title desc">
+  <title id="title">Thai Character Classification</title>
+  <desc id="desc">MobileNetV3-Large project banner with an abstract character image and neural network.</desc>
+  <rect width="1200" height="280" rx="18" fill="#101f32"/>
+  <path d="M0 242H1200M890 0V280M1030 0V280" stroke="#203349" stroke-width="1"/>
+  <rect x="48" y="43" width="34" height="4" rx="2" fill="#52cfb1"/>
+  <text x="48" y="88" fill="#81dfc7" font-family="Arial, sans-serif" font-size="14" letter-spacing="3">COMPUTER VISION / DEEP LEARNING</text>
+  <text x="46" y="145" fill="#f6f7fa" font-family="Arial, sans-serif" font-size="43" font-weight="700">Thai Character Classification</text>
+  <text x="48" y="188" fill="#aab9ca" font-family="Arial, sans-serif" font-size="21">MobileNetV3-Large</text>
+  <text x="48" y="244" fill="#dbe6ef" font-family="Arial, sans-serif" font-size="14" letter-spacing="1">80 CLASSES</text>
+  <circle cx="173" cy="239" r="2" fill="#52cfb1"/>
+  <text x="193" y="244" fill="#dbe6ef" font-family="Arial, sans-serif" font-size="14" letter-spacing="1">PYTORCH</text>
+  <circle cx="299" cy="239" r="2" fill="#52cfb1"/>
+  <text x="319" y="244" fill="#dbe6ef" font-family="Arial, sans-serif" font-size="14" letter-spacing="1">GOOGLE COLAB</text>
+  <rect x="854" y="73" width="116" height="134" rx="13" fill="#f6f2e9"/>
+  <rect x="868" y="91" width="88" height="98" rx="5" fill="none" stroke="#c6bda9" stroke-dasharray="4 4"/>
+  <path d="M890 167V127C890 108 929 105 934 124V168M890 134C905 132 918 138 919 148" fill="none" stroke="#152a40" stroke-width="8" stroke-linecap="round"/>
+  <path d="M986 140H1025M1018 134L1025 140L1018 146" fill="none" stroke="#52cfb1" stroke-width="2"/>
+  <g stroke="#3c756f" stroke-width="1.5"><path d="M1050 105L1100 125L1146 140M1050 140L1100 125M1050 140L1100 160L1146 140M1050 175L1100 160M1050 105L1100 160M1050 175L1100 125"/></g>
+  <g fill="#52cfb1"><circle cx="1050" cy="105" r="6"/><circle cx="1050" cy="140" r="6"/><circle cx="1050" cy="175" r="6"/><circle cx="1100" cy="125" r="6"/><circle cx="1100" cy="160" r="6"/><circle cx="1146" cy="140" r="7"/></g>
+</svg>

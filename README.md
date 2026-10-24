@@ -1,136 +1,98 @@
-# จำแนกตัวอักษรไทยด้วย MobileNetV3-Large
+![Thai Character Classification — MobileNetV3-Large](docs/images/project-banner.svg)
 
-โครงการจำแนกตัวอักษรไทย 80 คลาสด้วย PyTorch และ Transfer Learning จาก ImageNet
-มีโค้ดสำหรับฝึกโมเดล ประเมินผล และสร้างไฟล์ส่งคำตอบบน Google Colab
+# ระบบจำแนกตัวอักษรไทย
+
+ใช้ **MobileNetV3-Large** จำแนกพยัญชนะ สระ วรรณยุกต์ เครื่องหมาย และตัวเลขไทย
+รวม **80 คลาส** ด้วย PyTorch โครงการนี้ครอบคลุมการฝึกโมเดล การประเมินกับชุดข้อมูลแยก
+และการสร้างไฟล์ส่งคำตอบสำหรับ Project 1 บน Google Colab
+
+[เริ่มใช้งาน](#เริ่มใช้งาน) · [แนวทางการฝึก](#แนวทางการฝึก) · [ผลประเมิน](#ผลประเมิน) · [คู่มือฉบับเต็ม](docs/usage.md)
 
 ## เริ่มใช้งาน
 
-เลือก notebook ตามงานที่ต้องการ:
+เลือก notebook ตามงานที่ต้องการ แล้วเปิดใน Google Colab:
 
-1. [ฝึกโมเดล](notebooks/person3_mobilenetv3_colab.ipynb)
-2. [ประเมินผล](notebooks/person3_mobilenetv3_evaluation_colab.ipynb)
-3. [สร้างไฟล์ส่งคำตอบ](notebooks/person3_mobilenetv3_submission_colab.ipynb)
+| งาน | ไฟล์ที่ใช้ | ผลลัพธ์หลัก |
+| :--- | :--- | :--- |
+| **ฝึกโมเดล** | [Training notebook](notebooks/person3_mobilenetv3_colab.ipynb) | checkpoint, ประวัติการฝึก และกราฟ |
+| **ประเมินผล** | [Evaluation notebook](notebooks/person3_mobilenetv3_evaluation_colab.ipynb) | คำทำนาย ตัวชี้วัด และ confusion matrix เมื่อมีเฉลย |
+| **สร้างไฟล์ส่งคำตอบ** | [Submission notebook](notebooks/person3_mobilenetv3_submission_colab.ipynb) | `submission.csv` ตามแม่แบบ Project 1 |
 
-เปิดไฟล์ใน Google Colab เลือก GPU runtime เชื่อมต่อ Google Drive
-แล้วแก้ตำแหน่งไฟล์ใน cell ตั้งค่าก่อนรันตามลำดับ
+1. เตรียมชุดข้อมูลหรือ checkpoint บน Google Drive ตามงานที่เลือก
+2. เปิด notebook เชื่อมต่อ Drive แล้วแก้ path ใน cell ตั้งค่า สำหรับฝึกโมเดลต้องใช้ GPU
+3. รัน cell ตามลำดับ ผลลัพธ์จะบันทึกใน `OUTPUT_DIR` ที่กำหนด
 
-ชุดข้อมูล โมเดลที่ฝึกแล้ว และฟอนต์ไม่ได้รวมอยู่ใน repository
-ดูวิธีเตรียมไฟล์ได้ที่ [คู่มือข้อมูล](data/README.md) และ [คู่มือโมเดล](models/README.md)
+**ชุดข้อมูล checkpoint และฟอนต์ไม่ได้รวมอยู่ใน repository** ต้องใช้ไฟล์เดิมหรือขอจากเจ้าของข้อมูล
+ดู [ตำแหน่งไฟล์และวิธีตั้งค่า](docs/usage.md) ก่อนรัน
+
+## แนวทางการฝึก
+
+ภาพต้นฉบับมีสัดส่วนต่างกัน จึงเติมขอบสีขาวแบบ **letterbox** ให้ได้ภาพ RGB ขนาด
+**160 × 160 พิกเซล** แล้วปรับค่าพิกเซลด้วย ImageNet normalization
+ใช้ขั้นตอนเดียวกันทั้งตอนฝึกและตอนทำนาย
+
+การฝึกเริ่มจากน้ำหนัก ImageNet แล้วเปลี่ยนหัวจำแนกเป็น 80 คลาส:
+
+1. **ฝึกหัวจำแนก** — ตรึง feature extractor แล้วฝึก classifier สูงสุด 3 epochs
+2. **ปรับทั้งโมเดล** — ปลด backbone แล้ว fine-tune สูงสุด 12 epochs โดยใช้ learning rate ต่ำกว่า classifier 10 เท่า
+3. **เลือก checkpoint** — บันทึกรอบที่ validation accuracy สูงสุด และใช้ validation loss สำหรับ early stopping
+
+ใช้ภาพที่ทำ augmentation ไว้แล้วเฉพาะฝั่งฝึก ร่วมกับ class-weighted loss,
+label smoothing `0.1` และ mixed precision บน GPU โดยกำหนด seed เป็น `42`
+
+> **การแบ่งข้อมูล:** notebook ใช้ split 80/20 ที่เตรียมไว้แล้ว โฟลเดอร์ชื่อ
+> `split_80_20/test` ทำหน้าที่เป็น **validation** ของงานนี้ ส่วนชุดทดสอบจริงของอาจารย์ใช้แยกต่างหาก
+
+## ผลประเมิน
+
+ค่าที่บันทึกไว้ใน [model card](docs/evaluation/model_card.json):
+
+| ชุดประเมิน | Accuracy | ขอบเขตของผล |
+| :--- | ---: | :--- |
+| Validation | **99.54%** | ค่าสูงสุดที่บันทึกไว้ระหว่างการฝึก |
+| Mock จาก validation | **99.50%** | เป็นส่วนหนึ่งของ validation ไม่ใช่ชุดทดสอบอิสระ |
+
+ตัวเลขข้างต้นเป็นผลเดิมของโครงการ ยังไม่ได้รันประเมินใหม่จากการจัด repository
+ดูค่าราย epoch ได้ใน [ประวัติการฝึก](docs/evaluation/training_history.csv)
+
+Notebook ประเมินรองรับชุดภาพแบบ ZIP หรือโฟลเดอร์ สร้าง `predictions.csv` และสรุปการรัน
+ได้โดยไม่ต้องฝึกใหม่ เมื่อมีเฉลยจะคำนวณ Accuracy, Balanced Accuracy, Macro F1,
+Weighted F1 พร้อมรายงานรายคลาสและคู่ตัวอักษรที่สับสน
+
+สำหรับชุดภายนอก **ALICE-THI ครอบคลุม 77 จาก 80 คลาส** ส่วน PrintFont เป็นภาพตัวพิมพ์ที่สร้างจากฟอนต์
+ควรรายงานผลแต่ละชุดแยกกัน ไม่รวมเป็นคะแนนเดียว
+
+## การส่งคำตอบสำหรับ Project 1
+
+โมเดลจำแนก 80 คลาส แต่แม่แบบงานนี้ใช้ **72 คลาส** Notebook ส่งงานจึงกรองคำตอบตาม
+`Project_1-data_dict.csv` ก่อนเลือกคลาส แล้วเทียบชื่อภาพกับ `gt_path` ในแม่แบบ
+และกรอกเฉพาะคอลัมน์กลุ่มที่ตั้งไว้ใน `TEAM_COLUMN`
+
+ค่าที่ส่งเป็น **`class_id` ของ Project 1** ไม่ใช่รหัส TIS-620 หรือ model index
+พร้อมตรวจจำนวนแถวและการจับคู่ชื่อภาพก่อนสร้าง `submission.csv`
+ดู [ขั้นตอนตั้งค่า](docs/usage.md#ตั้งค่าก่อนสร้างไฟล์ส่งคำตอบ)
 
 ## โครงสร้างโครงการ
 
 ```text
-notebooks/          ฝึกโมเดล ประเมินผล และสร้างไฟล์ส่งคำตอบ
-scripts/            สร้างชุดทดสอบและภาพตัวอย่าง
+notebooks/          Notebook สำหรับฝึก ประเมิน และส่งคำตอบ
+scripts/            สร้างชุดทดสอบตัวพิมพ์ ชุดจำลอง และภาพตัวอย่าง
 data/metadata/      รายการคลาส ตารางเทียบรหัส และแม่แบบส่งคำตอบ
-docs/               รายละเอียดโมเดล ภาพประกอบ และสไลด์นำเสนอ
-models/README.md    คู่มือเตรียมโมเดล
-requirements.txt    ไลบรารีที่ใช้
+docs/               คู่มือ รายละเอียดโมเดล และสไลด์นำเสนอ
+models/README.md    วิธีเตรียม checkpoint
+requirements.txt    ไลบรารีสำหรับรันในเครื่อง
 ```
 
-## ผลประเมิน
+สคริปต์ใน `scripts/` ใช้สร้างชุดตัวพิมพ์ขนาดเล็ก ชุดตัวพิมพ์ขนาดใหญ่ 32,000 ภาพ
+และชุดจำลอง Project 1 จำนวน 500 ภาพ โดยแยกเฉลยออกจาก ZIP สำหรับทำนาย
+อ่าน [วิธีติดตั้งและรันสคริปต์](docs/usage.md#ติดตั้งและรันสคริปต์ในเครื่อง)
 
-ผลที่บันทึกใน [รายละเอียดโมเดล](docs/evaluation/model_card.json):
+ชุดข้อมูล โมเดล ฟอนต์ ZIP ผลส่งคำตอบ และ notebook เก่าจะเก็บในเครื่องตาม `.gitignore`
+จึงไม่ถูกรวมเมื่อ clone โครงการ
 
-- Validation accuracy: **99.54%**
-- Mock accuracy: **99.50%**
+---
 
-ชุด mock เป็นส่วนหนึ่งของ validation จึงไม่ใช่ผลทดสอบกับข้อมูลใหม่ที่แยกอิสระ
-ค่าข้างต้นเป็นบันทึกเดิม ยังไม่ได้รันประเมินใหม่จากการจัด repository
-ส่วนชุด ALICE ครอบคลุม 77 จาก 80 คลาส และชุดตัวพิมพ์ควรรายงานผลแยกจากชุดลายมือ
+**เอกสาร:** [คู่มือใช้งาน](docs/usage.md) · [ข้อมูล](data/README.md) · [โมเดล](models/README.md) · [สไลด์นำเสนอ](docs/slide_dl_presentation.pdf)
 
-## รายละเอียดการใช้งาน
-
-<details>
-<summary>เตรียมไฟล์บน Google Drive</summary>
-
-วางไฟล์ภายใต้ `/content/drive/MyDrive/dl/` หรือตั้งค่า path ใหม่ใน notebook:
-
-```text
-TH_Characters.zip
-thai_char_person3_outputs/mobilenetv3_large_best.pt
-person3_evaluation/labels.csv
-Project_1-data_dict.csv
-Project_1-InputOutput.csv
-```
-
-รายการคลาส ตารางเทียบรหัส และแม่แบบอยู่ใน `data/metadata/`
-ส่วนชุดข้อมูลและ checkpoint ต้องเตรียมแยกเอง ยังไม่มีลิงก์ดาวน์โหลดสาธารณะ
-ตั้งค่าไฟล์ทดสอบและตำแหน่งผลลัพธ์ให้ตรงกับงานใน notebook
-
-โมเดลมี 80 คลาส แต่ Project 1 ใช้ตารางส่งคำตอบ 72 คลาส
-ให้อ้างอิง `class_to_idx` ใน checkpoint และ dictionary ของงานในการเทียบรหัส
-
-</details>
-
-<details>
-<summary>ติดตั้งและรันสคริปต์ในเครื่อง</summary>
-
-ใช้ Python 3.10 ขึ้นไป และรันจากโฟลเดอร์หลักของโครงการ:
-
-```bash
-python -m venv .venv
-```
-
-เปิดใช้งาน environment:
-
-```powershell
-# Windows PowerShell
-.venv\Scripts\Activate.ps1
-```
-
-```bash
-# macOS / Linux
-source .venv/bin/activate
-```
-
-ติดตั้งไลบรารี:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-เตรียมฟอนต์ใน `assets/fonts/` ตามชื่อในสคริปต์ แล้วเลือกคำสั่งที่ต้องการ:
-
-```bash
-python scripts/build_print_font_test.py
-python scripts/build_print_font_large_test.py --finalize
-python scripts/build_project1_mock_test.py
-python scripts/make_alice_preview.py
-```
-
-สคริปต์ mock ต้องใช้ชุด ALICE และ PrintFont Large ที่แตกไฟล์แล้ว
-พร้อม dictionary และ template ใน `data/metadata/`
-ชุดข้อมูลและ ZIP ที่สร้างใหม่อยู่ใน `data/local/` ส่วนภาพตัวอย่าง ALICE อยู่ใน `docs/images/`
-
-สคริปต์ตัวพิมพ์ขนาดเล็กจะหยุดเมื่อมีผลลัพธ์เดิมอยู่
-ตัว Large รองรับ `--start` และ `--count` เพื่อแบ่งรอบ และต้องใช้ `--finalize`
-เพื่อสร้าง metadata และ ZIP ส่วน `--clean` จะลบผลลัพธ์ Large เดิมก่อนสร้างใหม่
-
-รายการไลบรารียังไม่ได้ล็อกเวอร์ชันตาม environment ต้นฉบับ
-และ `google.colab` ใช้เฉพาะบน Colab
-
-</details>
-
-<details>
-<summary>ไฟล์ที่เก็บเฉพาะในเครื่อง</summary>
-
-ชุดข้อมูล (`data/local/`), checkpoint (`models/`), ฟอนต์ (`assets/fonts/`),
-ZIP (`archives/`), ผลส่งคำตอบ (`results/submissions/`), notebook เก่า
-(`notebooks/legacy/`) และ Drive export (`archive_local/`) ถูกยกเว้นด้วย `.gitignore`
-จึงไม่รวมอยู่เมื่อ clone โครงการ
-
-บันทึกการจัดไฟล์: [รายการย้ายและลบสำเนา](docs/cleanup_manifest.json),
-[รายการไฟล์เดิม](docs/original_inventory.csv) และ [ผลการตรวจสอบ](docs/verification.md)
-
-</details>
-
-## เอกสารและสิทธิ์การใช้งาน
-
-[รายละเอียดโมเดล](docs/evaluation/model_card.json) ·
-[สไลด์นำเสนอ](docs/slide_dl_presentation.pdf) ·
-[MIT License](LICENSE) ·
-[สิทธิ์ของเนื้อหาจากภายนอก](THIRD_PARTY_NOTICES.md)
-
-MIT ครอบคลุมโค้ดและเอกสารที่ทีมสร้าง ส่วนชุดข้อมูล ฟอนต์ โมเดล
-และเอกสารจากบุคคลอื่นมีเงื่อนไขสิทธิ์แยกต่างหาก
+**สิทธิ์การใช้งาน:** [MIT License](LICENSE) สำหรับโค้ดและเอกสารที่ทีมสร้าง
+ส่วนข้อมูล ฟอนต์ โมเดล และเนื้อหาจากภายนอกอยู่ภายใต้ [เงื่อนไขแยก](THIRD_PARTY_NOTICES.md)
