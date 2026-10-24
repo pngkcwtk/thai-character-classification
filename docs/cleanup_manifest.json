@@ -1,0 +1,651 @@
+{
+  "removed_duplicate_bytes": 139062069,
+  "operations": [
+    {
+      "action": "move",
+      "source": "external_data",
+      "target": "data\\local\\external_data"
+    },
+    {
+      "action": "move",
+      "source": "preview_samples",
+      "target": "data\\local\\preview_samples"
+    },
+    {
+      "action": "move",
+      "source": "source_sample",
+      "target": "data\\local\\source_sample"
+    },
+    {
+      "action": "move",
+      "source": "test_dataset",
+      "target": "data\\local\\test_dataset"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_External_ALICE",
+      "target": "data\\local\\TH_Characters_External_ALICE"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Large_Test",
+      "target": "data\\local\\TH_Characters_PrintFont_Large_Test"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Test",
+      "target": "data\\local\\TH_Characters_PrintFont_Test"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_Test_5pct",
+      "target": "data\\local\\TH_Characters_Test_5pct"
+    },
+    {
+      "action": "move",
+      "source": "Project_1_Mock_Instructor_Test",
+      "target": "data\\local\\Project_1_Mock_Instructor_Test"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261017T030019Z-1-002.zip",
+      "target": "archives\\dl-20261017T030019Z-1-002.zip"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261017T030019Z-1-003.zip",
+      "target": "archives\\dl-20261017T030019Z-1-003.zip"
+    },
+    {
+      "action": "move",
+      "source": "person3_MobileNetV3-Large_evaluation_package.zip",
+      "target": "archives\\person3_MobileNetV3-Large_evaluation_package.zip"
+    },
+    {
+      "action": "move",
+      "source": "PROJECT_1_MOCK_INSTRUCTOR_TEST.zip",
+      "target": "archives\\PROJECT_1_MOCK_INSTRUCTOR_TEST.zip"
+    },
+    {
+      "action": "move",
+      "source": "test_dataset.zip",
+      "target": "archives\\test_dataset.zip"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters.zip",
+      "target": "archives\\TH_Characters.zip"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_External_ALICE.zip",
+      "target": "archives\\TH_Characters_External_ALICE.zip"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Large_Test.zip",
+      "target": "archives\\TH_Characters_PrintFont_Large_Test.zip"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Test.zip",
+      "target": "archives\\TH_Characters_PrintFont_Test.zip"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_Test_5pct.zip",
+      "target": "archives\\TH_Characters_Test_5pct.zip"
+    },
+    {
+      "action": "move",
+      "source": "trainc-subc-test.zip",
+      "target": "archives\\trainc-subc-test.zip"
+    },
+    {
+      "action": "move",
+      "source": "BaiJamjuree-Bold.ttf",
+      "target": "assets\\fonts\\BaiJamjuree-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "BaiJamjuree-Regular.ttf",
+      "target": "assets\\fonts\\BaiJamjuree-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "ChakraPetch-Bold.ttf",
+      "target": "assets\\fonts\\ChakraPetch-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "ChakraPetch-Regular.ttf",
+      "target": "assets\\fonts\\ChakraPetch-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Kanit-Bold.ttf",
+      "target": "assets\\fonts\\Kanit-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Kanit-Regular.ttf",
+      "target": "assets\\fonts\\Kanit-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Mitr-Bold.ttf",
+      "target": "assets\\fonts\\Mitr-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Mitr-Regular.ttf",
+      "target": "assets\\fonts\\Mitr-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "NotoSansThai-Variable.ttf",
+      "target": "assets\\fonts\\NotoSansThai-Variable.ttf"
+    },
+    {
+      "action": "move",
+      "source": "NotoSansThaiLooped-Variable.ttf",
+      "target": "assets\\fonts\\NotoSansThaiLooped-Variable.ttf"
+    },
+    {
+      "action": "move",
+      "source": "NotoSerifThai-Variable.ttf",
+      "target": "assets\\fonts\\NotoSerifThai-Variable.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Pridi-Bold.ttf",
+      "target": "assets\\fonts\\Pridi-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Pridi-Regular.ttf",
+      "target": "assets\\fonts\\Pridi-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Prompt-Bold.ttf",
+      "target": "assets\\fonts\\Prompt-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Prompt-Regular.ttf",
+      "target": "assets\\fonts\\Prompt-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Sarabun-Bold.ttf",
+      "target": "assets\\fonts\\Sarabun-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Sarabun-Regular.ttf",
+      "target": "assets\\fonts\\Sarabun-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Taviraj-Bold.ttf",
+      "target": "assets\\fonts\\Taviraj-Bold.ttf"
+    },
+    {
+      "action": "move",
+      "source": "Taviraj-Regular.ttf",
+      "target": "assets\\fonts\\Taviraj-Regular.ttf"
+    },
+    {
+      "action": "move",
+      "source": "build_print_font_large_test.py",
+      "target": "scripts\\build_print_font_large_test.py"
+    },
+    {
+      "action": "move",
+      "source": "build_print_font_test.py",
+      "target": "scripts\\build_print_font_test.py"
+    },
+    {
+      "action": "move",
+      "source": "build_project1_mock_test.py",
+      "target": "scripts\\build_project1_mock_test.py"
+    },
+    {
+      "action": "move",
+      "source": "make_alice_preview.py",
+      "target": "scripts\\make_alice_preview.py"
+    },
+    {
+      "action": "move",
+      "source": "Copy_of_person3_mobilenetv3_colab.ipynb",
+      "target": "notebooks\\Copy_of_person3_mobilenetv3_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_mobilenetv3_colab.ipynb",
+      "target": "notebooks\\person3_mobilenetv3_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_mobilenetv3_evaluation_colab.fixed.ipynb",
+      "target": "notebooks\\legacy\\person3_mobilenetv3_evaluation_colab.fixed.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_mobilenetv3_evaluation_colab.ipynb",
+      "target": "notebooks\\person3_mobilenetv3_evaluation_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_mobilenetv3_evaluation_colab.ipynb.bak",
+      "target": "notebooks\\legacy\\person3_mobilenetv3_evaluation_colab.ipynb.bak"
+    },
+    {
+      "action": "move",
+      "source": "person3_mobilenetv3_submission_colab.ipynb",
+      "target": "notebooks\\person3_mobilenetv3_submission_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_mobilenetv3_submission_colab_2.ipynb",
+      "target": "notebooks\\person3_mobilenetv3_submission_colab_2.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "team_test_mobilenetv3_colab.ipynb",
+      "target": "notebooks\\team_test_mobilenetv3_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "team_test_mobilenetv3_submission_colab.ipynb",
+      "target": "notebooks\\team_test_mobilenetv3_submission_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "mobilenetv3_large_best.pt",
+      "target": "models\\mobilenetv3_large_best.pt"
+    },
+    {
+      "action": "move",
+      "source": "Project_1-data_dict.csv",
+      "target": "data\\metadata\\Project_1-data_dict.csv"
+    },
+    {
+      "action": "move",
+      "source": "Project_1-InputOutput (1).csv",
+      "target": "results\\submissions\\Project_1-InputOutput (1).csv"
+    },
+    {
+      "action": "move",
+      "source": "Project_1-InputOutput.csv",
+      "target": "data\\metadata\\Project_1-InputOutput.csv"
+    },
+    {
+      "action": "move",
+      "source": "Project_1-InputOutput_MOCK.csv",
+      "target": "results\\submissions\\Project_1-InputOutput_MOCK.csv"
+    },
+    {
+      "action": "move",
+      "source": "submission (1).csv",
+      "target": "results\\submissions\\submission (1).csv"
+    },
+    {
+      "action": "move",
+      "source": "submission (2).csv",
+      "target": "results\\submissions\\submission (2).csv"
+    },
+    {
+      "action": "move",
+      "source": "submission (3).csv",
+      "target": "results\\submissions\\submission (3).csv"
+    },
+    {
+      "action": "move",
+      "source": "submission-test.csv",
+      "target": "results\\submissions\\submission-test.csv"
+    },
+    {
+      "action": "move",
+      "source": "submission.csv",
+      "target": "results\\submissions\\submission.csv"
+    },
+    {
+      "action": "move",
+      "source": "ALICE_THI_kor_kai_grid.png",
+      "target": "docs\\images\\ALICE_THI_kor_kai_grid.png"
+    },
+    {
+      "action": "move",
+      "source": "source_sample_preview.png",
+      "target": "docs\\images\\source_sample_preview.png"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Large_Test_preview.png",
+      "target": "docs\\images\\TH_Characters_PrintFont_Large_Test_preview.png"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Large_Test_preview_2.png",
+      "target": "docs\\images\\TH_Characters_PrintFont_Large_Test_preview_2.png"
+    },
+    {
+      "action": "move",
+      "source": "TH_Characters_PrintFont_Test_preview.png",
+      "target": "docs\\images\\TH_Characters_PrintFont_Test_preview.png"
+    },
+    {
+      "action": "move",
+      "source": "explain01.jpg",
+      "target": "docs\\images\\explain01.jpg"
+    },
+    {
+      "action": "move",
+      "source": "explain02.jpg",
+      "target": "docs\\images\\explain02.jpg"
+    },
+    {
+      "action": "move",
+      "source": "slide_dl_presentation.pdf",
+      "target": "docs\\slide_dl_presentation.pdf"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\labels.csv",
+      "target": "data\\metadata\\labels.csv"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\mobilenetv3_large_best.pt",
+      "target": "models\\evaluation_package\\mobilenetv3_large_best.pt"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\model_card.json",
+      "target": "docs\\evaluation\\model_card.json"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\person3_mobilenetv3_evaluation_colab.ipynb",
+      "target": "notebooks\\legacy\\person3_mobilenetv3_evaluation_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\person3_mobilenetv3_submission_colab.ipynb",
+      "target": "notebooks\\legacy\\person3_mobilenetv3_submission_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\PERSON3_MODEL_TO_EVALUATION.txt",
+      "target": "docs\\evaluation\\PERSON3_MODEL_TO_EVALUATION.txt"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\README.md",
+      "target": "docs\\evaluation\\README.md"
+    },
+    {
+      "action": "move",
+      "source": "person3_evaluation_package\\training_history.csv",
+      "target": "docs\\evaluation\\training_history.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\Project_1-data_dict.csv",
+      "target": "archive_local\\drive_export\\Project_1-data_dict.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\Project_1-InputOutput.csv",
+      "target": "archive_local\\drive_export\\Project_1-InputOutput.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\Untitled0.ipynb",
+      "target": "archive_local\\drive_export\\Untitled0.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\person3_mobilenetv3\\submission.csv",
+      "target": "archive_local\\drive_export\\submission_outputs\\person3_mobilenetv3\\submission.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\person3_mobilenetv3\\submission_detailed.csv",
+      "target": "archive_local\\drive_export\\submission_outputs\\person3_mobilenetv3\\submission_detailed.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\person3_mobilenetv3\\submission_detailed_partial.csv",
+      "target": "archive_local\\drive_export\\submission_outputs\\person3_mobilenetv3\\submission_detailed_partial.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\song-ja\\Recap.pdf",
+      "target": "archive_local\\drive_export\\submission_outputs\\song-ja\\Recap.pdf"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\song-ja\\submission.csv",
+      "target": "archive_local\\drive_export\\submission_outputs\\song-ja\\submission.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\song-ja\\team_test_mobilenetv3_colab.ipynb",
+      "target": "archive_local\\drive_export\\submission_outputs\\song-ja\\team_test_mobilenetv3_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\submission_outputs\\song-ja\\team_test_mobilenetv3_submission_colab.ipynb",
+      "target": "archive_local\\drive_export\\submission_outputs\\song-ja\\team_test_mobilenetv3_submission_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\thai_char_person3_outputs\\mobilenetv3_large_best.pt",
+      "target": "archive_local\\drive_export\\thai_char_person3_outputs\\mobilenetv3_large_best.pt"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\thai_char_person3_outputs\\training_history.csv",
+      "target": "archive_local\\drive_export\\thai_char_person3_outputs\\training_history.csv"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\CNN_Baseline.zip",
+      "target": "archive_local\\drive_export\\zip-model\\CNN_Baseline.zip"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\person3_MobileNetV3-Large_evaluation_package.zip",
+      "target": "archive_local\\drive_export\\zip-model\\person3_MobileNetV3-Large_evaluation_package.zip"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\Resnet.zip",
+      "target": "archive_local\\drive_export\\zip-model\\Resnet.zip"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\test set\\TH_Characters_External_ALICE.zip",
+      "target": "archive_local\\drive_export\\zip-model\\test set\\TH_Characters_External_ALICE.zip"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\test set\\TH_Characters_PrintFont_Large_Test.zip",
+      "target": "archive_local\\drive_export\\zip-model\\test set\\TH_Characters_PrintFont_Large_Test.zip"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\test set\\TH_Characters_PrintFont_Large_Test_preview.png",
+      "target": "archive_local\\drive_export\\zip-model\\test set\\TH_Characters_PrintFont_Large_Test_preview.png"
+    },
+    {
+      "action": "move",
+      "source": "dl-20261002T033618Z-1-001\\dl\\zip-model\\test set\\TH_Characters_Test_5pct.zip",
+      "target": "archive_local\\drive_export\\zip-model\\test set\\TH_Characters_Test_5pct.zip"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/zip-model/person3_MobileNetV3-Large_evaluation_package.zip",
+      "target": "archives/person3_MobileNetV3-Large_evaluation_package.zip",
+      "sha256": "cbe8868623087b622eabef90e93b3b2e4c42eda4b372ecbe9eccb7c3f3ccf55e",
+      "bytes": 16240833,
+      "final_target": "archives/person3_MobileNetV3-Large_evaluation_package.zip",
+      "current_target_sha256": "cbe8868623087b622eabef90e93b3b2e4c42eda4b372ecbe9eccb7c3f3ccf55e"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/zip-model/test set/TH_Characters_External_ALICE.zip",
+      "target": "archives/TH_Characters_External_ALICE.zip",
+      "sha256": "02065679d41052cbd6a226776a332b86b9923a869978561621c9a3a4d1c2beb3",
+      "bytes": 3803161,
+      "final_target": "archives/TH_Characters_External_ALICE.zip",
+      "current_target_sha256": "02065679d41052cbd6a226776a332b86b9923a869978561621c9a3a4d1c2beb3"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/zip-model/test set/TH_Characters_PrintFont_Large_Test.zip",
+      "target": "archives/TH_Characters_PrintFont_Large_Test.zip",
+      "sha256": "1adfce32677a300dc7473b92c6247e110908bf4f85746fdf47444d40eed22d6b",
+      "bytes": 63836839,
+      "final_target": "archives/TH_Characters_PrintFont_Large_Test.zip",
+      "current_target_sha256": "1adfce32677a300dc7473b92c6247e110908bf4f85746fdf47444d40eed22d6b"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/zip-model/test set/TH_Characters_Test_5pct.zip",
+      "target": "archives/TH_Characters_Test_5pct.zip",
+      "sha256": "dafa6423803c9b69f98e08172e96080e8c5807213b0b5f1eda1573ffdb8b3755",
+      "bytes": 14171872,
+      "final_target": "archives/TH_Characters_Test_5pct.zip",
+      "current_target_sha256": "dafa6423803c9b69f98e08172e96080e8c5807213b0b5f1eda1573ffdb8b3755"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "models/evaluation_package/mobilenetv3_large_best.pt",
+      "target": "models/mobilenetv3_large_best.pt",
+      "sha256": "750b8801261d0343ed249fa2952d6ce06463fd1e7dc5c5db52cee1cf6443aec4",
+      "bytes": 17429681,
+      "final_target": "models/mobilenetv3_large_best.pt",
+      "current_target_sha256": "750b8801261d0343ed249fa2952d6ce06463fd1e7dc5c5db52cee1cf6443aec4"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/thai_char_person3_outputs/mobilenetv3_large_best.pt",
+      "target": "models/mobilenetv3_large_best.pt",
+      "sha256": "750b8801261d0343ed249fa2952d6ce06463fd1e7dc5c5db52cee1cf6443aec4",
+      "bytes": 17429681,
+      "final_target": "models/mobilenetv3_large_best.pt",
+      "current_target_sha256": "750b8801261d0343ed249fa2952d6ce06463fd1e7dc5c5db52cee1cf6443aec4"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "notebooks/team_test_mobilenetv3_colab.ipynb",
+      "target": "notebooks/Copy_of_person3_mobilenetv3_colab.ipynb",
+      "sha256": "5340542b7cccf201d2948188db80c020bc87c0d3f243bf1813db4aca3810134b",
+      "bytes": 978503,
+      "final_target": "notebooks/legacy/Copy_of_person3_mobilenetv3_colab.ipynb",
+      "current_target_sha256": "5340542b7cccf201d2948188db80c020bc87c0d3f243bf1813db4aca3810134b"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/submission_outputs/song-ja/team_test_mobilenetv3_colab.ipynb",
+      "target": "notebooks/Copy_of_person3_mobilenetv3_colab.ipynb",
+      "sha256": "5340542b7cccf201d2948188db80c020bc87c0d3f243bf1813db4aca3810134b",
+      "bytes": 978503,
+      "final_target": "notebooks/legacy/Copy_of_person3_mobilenetv3_colab.ipynb",
+      "current_target_sha256": "5340542b7cccf201d2948188db80c020bc87c0d3f243bf1813db4aca3810134b"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "notebooks/legacy/person3_mobilenetv3_evaluation_colab.ipynb",
+      "target": "notebooks/person3_mobilenetv3_evaluation_colab.ipynb",
+      "sha256": "9d916c9af81307fc9f6e7645994b479ec603d275cb05f341ee18bc0fd0b13f35",
+      "bytes": 227500,
+      "final_target": "notebooks/person3_mobilenetv3_evaluation_colab.ipynb",
+      "current_target_sha256": "16547767641bd560c25d6ac7a2ad6f42052cf2f2bfbb80179399140707872407",
+      "subsequent_edit": "Main notebook outputs and execution counts cleared after byte-identical deduplication."
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "notebooks/person3_mobilenetv3_submission_colab_2.ipynb",
+      "target": "notebooks/person3_mobilenetv3_submission_colab.ipynb",
+      "sha256": "b87c3875cb9017d5bd022f51b3c5472c180beb5df1e986f40b2b8a8fcf7380dd",
+      "bytes": 19575,
+      "final_target": "notebooks/person3_mobilenetv3_submission_colab.ipynb",
+      "current_target_sha256": "bb65db1c44ecffd6b4c0b67b403246b4611086f5602b5d50e7f2d551349e0da5",
+      "subsequent_edit": "Main notebook outputs and execution counts cleared after byte-identical deduplication."
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "results/submissions/submission-test.csv",
+      "target": "results/submissions/submission (3).csv",
+      "sha256": "a7842380853d57af62499347d39bebf7412833297a27d9583be7bd10d43949d7",
+      "bytes": 23698,
+      "final_target": "results/submissions/submission (3).csv",
+      "current_target_sha256": "a7842380853d57af62499347d39bebf7412833297a27d9583be7bd10d43949d7"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/submission_outputs/person3_mobilenetv3/submission.csv",
+      "target": "results/submissions/submission (3).csv",
+      "sha256": "a7842380853d57af62499347d39bebf7412833297a27d9583be7bd10d43949d7",
+      "bytes": 23698,
+      "final_target": "results/submissions/submission (3).csv",
+      "current_target_sha256": "a7842380853d57af62499347d39bebf7412833297a27d9583be7bd10d43949d7"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/submission_outputs/song-ja/submission.csv",
+      "target": "results/submissions/submission (3).csv",
+      "sha256": "a7842380853d57af62499347d39bebf7412833297a27d9583be7bd10d43949d7",
+      "bytes": 23698,
+      "final_target": "results/submissions/submission (3).csv",
+      "current_target_sha256": "a7842380853d57af62499347d39bebf7412833297a27d9583be7bd10d43949d7"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/submission_outputs/song-ja/Recap.pdf",
+      "target": "docs/slide_dl_presentation.pdf",
+      "sha256": "4ce31635331b0828d0607d76f9d0db43abaadbf7f36408bbbf50a887a670fc48",
+      "bytes": 3847655,
+      "final_target": "docs/slide_dl_presentation.pdf",
+      "current_target_sha256": "4ce31635331b0828d0607d76f9d0db43abaadbf7f36408bbbf50a887a670fc48"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "docs/images/TH_Characters_PrintFont_Large_Test_preview_2.png",
+      "target": "docs/images/TH_Characters_PrintFont_Large_Test_preview.png",
+      "sha256": "25ac35a926bf89afe8df9948122d5bbdc64e407274790e123a9503acb78d30cc",
+      "bytes": 13586,
+      "final_target": "docs/images/TH_Characters_PrintFont_Large_Test_preview.png",
+      "current_target_sha256": "25ac35a926bf89afe8df9948122d5bbdc64e407274790e123a9503acb78d30cc"
+    },
+    {
+      "action": "remove_exact_duplicate",
+      "source": "archive_local/drive_export/zip-model/test set/TH_Characters_PrintFont_Large_Test_preview.png",
+      "target": "docs/images/TH_Characters_PrintFont_Large_Test_preview.png",
+      "sha256": "25ac35a926bf89afe8df9948122d5bbdc64e407274790e123a9503acb78d30cc",
+      "bytes": 13586,
+      "final_target": "docs/images/TH_Characters_PrintFont_Large_Test_preview.png",
+      "current_target_sha256": "25ac35a926bf89afe8df9948122d5bbdc64e407274790e123a9503acb78d30cc"
+    },
+    {
+      "action": "move",
+      "source": "notebooks\\Copy_of_person3_mobilenetv3_colab.ipynb",
+      "target": "notebooks\\legacy\\Copy_of_person3_mobilenetv3_colab.ipynb"
+    },
+    {
+      "action": "move",
+      "source": "notebooks\\team_test_mobilenetv3_submission_colab.ipynb",
+      "target": "notebooks\\legacy\\team_test_mobilenetv3_submission_colab.ipynb"
+    }
+  ],
+  "notes": [
+    "SHA-256 equality was checked before deleting each duplicate. Main notebooks were subsequently cleared of outputs.",
+    "Dataset sample filenames and multiplicity were preserved.",
+    "Original ZIPs remain local even when extracted datasets also exist."
+  ]
+}

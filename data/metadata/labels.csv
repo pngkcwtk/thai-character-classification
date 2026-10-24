@@ -1,0 +1,81 @@
+class_id,tis620,char,unicode,name_en,name_th,category,n_images
+0,161,ก,U+0E01,ko_kai,ก ไก่,consonant,3953
+1,162,ข,U+0E02,kho_khai,ข ไข่,consonant,4042
+2,163,ฃ,U+0E03,kho_khuat,ฃ ขวด,consonant,3792
+3,164,ค,U+0E04,kho_khwai,ค ควาย,consonant,3942
+4,165,ฅ,U+0E05,kho_khon,ฅ คน,consonant,182
+5,166,ฆ,U+0E06,kho_rakhang,ฆ ระฆัง,consonant,188
+6,167,ง,U+0E07,ngo_ngu,ง งู,consonant,3964
+7,168,จ,U+0E08,cho_chan,จ จาน,consonant,3962
+8,169,ฉ,U+0E09,cho_ching,ฉ ฉิ่ง,consonant,3833
+9,170,ช,U+0E0A,cho_chang,ช ช้าง,consonant,3950
+10,171,ซ,U+0E0B,so_so,ซ โซ่,consonant,296
+11,172,ฌ,U+0E0C,cho_choe,ฌ เฌอ,consonant,183
+12,173,ญ,U+0E0D,yo_ying,ญ หญิง,consonant,3903
+13,174,ฎ,U+0E0E,do_chada,ฎ ชฎา,consonant,188
+14,175,ฏ,U+0E0F,to_patak,ฏ ปฏัก,consonant,3822
+15,176,ฐ,U+0E10,tho_than,ฐ ฐาน,consonant,3657
+16,177,ฑ,U+0E11,tho_montho,ฑ มณโฑ,consonant,3791
+17,178,ฒ,U+0E12,tho_phuthao,ฒ ผู้เฒ่า,consonant,3838
+18,179,ณ,U+0E13,no_nen,ณ เณร,consonant,3930
+19,180,ด,U+0E14,do_dek,ด เด็ก,consonant,4022
+20,181,ต,U+0E15,to_tao,ต เต่า,consonant,3947
+21,182,ถ,U+0E16,tho_thung,ถ ถุง,consonant,3952
+22,183,ท,U+0E17,tho_thahan,ท ทหาร,consonant,4027
+23,184,ธ,U+0E18,tho_thong,ธ ธง,consonant,3935
+24,185,น,U+0E19,no_nu,น หนู,consonant,5267
+25,186,บ,U+0E1A,bo_baimai,บ ใบไม้,consonant,4169
+26,187,ป,U+0E1B,po_pla,ป ปลา,consonant,4012
+27,188,ผ,U+0E1C,pho_phueng,ผ ผึ้ง,consonant,3982
+28,189,ฝ,U+0E1D,fo_fa,ฝ ฝา,consonant,3829
+29,190,พ,U+0E1E,pho_phan,พ พาน,consonant,3979
+30,191,ฟ,U+0E1F,fo_fan,ฟ ฟัน,consonant,3893
+31,192,ภ,U+0E20,pho_samphao,ภ สำเภา,consonant,3939
+32,193,ม,U+0E21,mo_ma,ม ม้า,consonant,4032
+33,194,ย,U+0E22,yo_yak,ย ยักษ์,consonant,4083
+34,195,ร,U+0E23,ro_ruea,ร เรือ,consonant,5062
+35,196,ฤ,U+0E24,rue,ตัว ฤ,vowel,3397
+36,197,ล,U+0E25,lo_ling,ล ลิง,consonant,4088
+37,198,ฦ,U+0E26,lue,ตัว ฦ,vowel,188
+38,199,ว,U+0E27,wo_waen,ว แหวน,consonant,4003
+39,200,ศ,U+0E28,so_sala,ศ ศาลา,consonant,3883
+40,201,ษ,U+0E29,so_ruesi,ษ ฤๅษี,consonant,4055
+41,202,ส,U+0E2A,so_suea,ส เสือ,consonant,3999
+42,203,ห,U+0E2B,ho_hip,ห หีบ,consonant,3965
+43,204,ฬ,U+0E2C,lo_chula,ฬ จุฬา,consonant,3793
+44,205,อ,U+0E2D,o_ang,อ อ่าง,consonant,4070
+45,206,ฮ,U+0E2E,ho_nokhuk,ฮ นกฮูก,consonant,3800
+46,207,ฯ,U+0E2F,paiyannoi,ไปยาลน้อย,sign,188
+47,208,ะ,U+0E30,sara_a,สระอะ,vowel,4062
+48,209,ั,U+0E31,mai_han_akat,ไม้หันอากาศ,vowel_above,4105
+49,210,า,U+0E32,sara_aa,สระอา,vowel,2309
+50,211,ำ,U+0E33,sara_am,สระอำ,vowel,4074
+51,212,ิ,U+0E34,sara_i,สระอิ,vowel_above,235
+52,213,ี,U+0E35,sara_ii,สระอี,vowel_above,4231
+53,214,ึ,U+0E36,sara_ue,สระอึ,vowel_above,199
+54,215,ื,U+0E37,sara_uee,สระอือ,vowel_above,4148
+55,216,ุ,U+0E38,sara_u,สระอุ,vowel_below,155
+56,217,ู,U+0E39,sara_uu,สระอู,vowel_below,4226
+57,224,เ,U+0E40,sara_e,สระเอ,vowel,202
+58,225,แ,U+0E41,sara_ae,สระแอ,vowel,4110
+59,226,โ,U+0E42,sara_o,สระโอ,vowel,698
+60,227,ใ,U+0E43,sara_ai_maimuan,สระใอ ไม้ม้วน,vowel,1087
+61,228,ไ,U+0E44,sara_ai_maimalai,สระไอ ไม้มลาย,vowel,719
+62,229,ๅ,U+0E45,lakkhangyao,ลากข้าง,vowel,4081
+63,230,ๆ,U+0E46,maiyamok,ไม้ยมก,sign,4144
+64,231,็,U+0E47,mai_taikhu,ไม้ไต่คู้,diacritic,4098
+65,232,่,U+0E48,mai_ek,ไม้เอก,tone,479
+66,233,้,U+0E49,mai_tho,ไม้โท,tone,1011
+67,234,๊,U+0E4A,mai_tri,ไม้ตรี,tone,4045
+68,235,๋,U+0E4B,mai_chattawa,ไม้จัตวา,tone,188
+69,236,์,U+0E4C,thanthakhat,ทัณฑฆาต,diacritic,723
+70,240,๐,U+0E50,thai_digit_zero,เลขศูนย์,digit,4158
+71,241,๑,U+0E51,thai_digit_one,เลขหนึ่ง,digit,4099
+72,242,๒,U+0E52,thai_digit_two,เลขสอง,digit,4063
+73,243,๓,U+0E53,thai_digit_three,เลขสาม,digit,4059
+74,244,๔,U+0E54,thai_digit_four,เลขสี่,digit,4053
+75,245,๕,U+0E55,thai_digit_five,เลขห้า,digit,4051
+76,246,๖,U+0E56,thai_digit_six,เลขหก,digit,4053
+77,247,๗,U+0E57,thai_digit_seven,เลขเจ็ด,digit,4025
+78,248,๘,U+0E58,thai_digit_eight,เลขแปด,digit,4058
+79,249,๙,U+0E59,thai_digit_nine,เลขเก้า,digit,4045

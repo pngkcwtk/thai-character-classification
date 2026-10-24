@@ -1,0 +1,377 @@
+PERSON 3: MOBILENETV3-LARGE - MODEL TO EVALUATION HANDOFF
+==========================================================
+
+1. ภาพรวมงาน
+------------
+งานส่วนนี้เป็นการจำแนกภาพตัวอักษรไทยจำนวน 80 คลาส โดยผู้จัดทำ Person 3
+รับผิดชอบโมเดล Transfer Learning B และเลือกใช้ MobileNetV3-Large ที่ผ่านการ
+pretrain ด้วย ImageNet ก่อนนำมาปรับให้จำแนกตัวอักษรไทย
+
+โมเดลนี้ออกแบบมาเพื่อเปรียบเทียบกับโมเดลของสมาชิกคนอื่น เช่น CNN from
+scratch และ ResNet โดยทุกโมเดลควรใช้ชุดแบ่งข้อมูลเดียวกัน ลำดับคลาสเดียวกัน
+และ metric เดียวกัน เพื่อให้การจัดอันดับยุติธรรม
+
+
+2. รายละเอียดชุดข้อมูล
+----------------------
+- จำนวนคลาส: 80 คลาส
+- ประเภทข้อมูล: พยัญชนะ สระ วรรณยุกต์ เครื่องหมาย และตัวเลขไทย
+- แหล่งภาพ: ภาพพิมพ์สแกน ลายมือสแกน และภาพที่สร้างจากฟอนต์
+- Seed ที่ใช้แบ่งข้อมูล: 42
+- Train/Validation split: 80/20
+- Train พร้อม offline augmentation: 560,915 ภาพ
+- Validation: 51,506 ภาพ
+
+ในไฟล์ข้อมูลเดิม โฟลเดอร์ Validation ใช้ชื่อว่า:
+
+  Train_Test-Base/split_80_20/test
+
+สำหรับงานนี้โฟลเดอร์ดังกล่าวทำหน้าที่เป็น Validation 20% ไม่ใช่ Test 5%
+ที่อาจารย์แยกไว้สำหรับประเมินผลสุดท้าย
+
+การแบ่งข้อมูลเป็นแบบ group-aware ซึ่งพยายามไม่ให้ฟอนต์หรือผู้เขียนคนเดียวกัน
+ปรากฏข้าม Train และ Validation วิธีนี้ช่วยลด data leakage และสะท้อนความสามารถ
+ในการทำนายฟอนต์หรือลายมือที่โมเดลไม่เคยเห็นได้ดีกว่าการสุ่มภาพทั่วไป
+
+
+3. Data Augmentation
+--------------------
+ทีม Data สร้าง offline augmentation จากภาพ Train เท่านั้น และรวมไว้ในโฟลเดอร์
+train_aug ภาพ Validation และ Test จริงไม่ได้ถูก augment
+
+เทคนิค augmentation ที่อยู่ในชุดข้อมูลประกอบด้วย:
+
+1) contrast
+2) sharpen
+3) elastic
+4) stroke
+5) rotation
+6) perspective
+7) brightness
+8) noise
+9) blur
+10) affine
+
+ไม่ควรนำ train_aug ไปแบ่ง Train/Validation ใหม่ เพราะภาพต้นฉบับและภาพ augment
+อาจหลุดไปคนละฝั่งและทำให้คะแนนสูงเกินจริง
+
+
+4. รายละเอียดโมเดล
+------------------
+- Architecture: MobileNetV3-Large
+- Framework: PyTorch / torchvision
+- Pretrained weights: ImageNet
+- จำนวน output units: 80
+- Input size: 160 x 160 pixels
+- Input channels: RGB
+- Checkpoint filename: mobilenetv3_large_best.pt
+- เกณฑ์เลือก checkpoint: Validation Accuracy สูงที่สุด
+
+MobileNetV3-Large เหมาะกับงานนี้เพราะมีขนาดเล็กและ inference เร็วกว่าโมเดล
+ขนาดใหญ่อย่าง ResNet หลายรุ่น แต่ยังรักษาความสามารถในการเรียนรู้ feature ที่ดี
+ด้วย inverted residual blocks, depthwise separable convolution และ squeeze-and-
+excitation
+
+
+5. Image Preprocessing Contract
+-------------------------------
+ทีม Evaluation ต้องใช้ preprocessing ตามนี้ทุกข้อ มิฉะนั้นคะแนนอาจลดลงหรือ
+ลำดับคลาสอาจผิด
+
+1) เปิดภาพแล้วแปลงเป็น RGB
+2) Resize เป็น 160 x 160 แบบ white letterbox
+3) รักษา aspect ratio ห้ามยืดภาพเป็นสี่เหลี่ยมโดยตรง
+4) ใช้ bilinear interpolation
+5) เติมพื้นที่ว่างด้วยสีขาว RGB (255, 255, 255)
+6) แปลงเป็น tensor
+7) Normalize ด้วย ImageNet statistics:
+
+   mean = [0.485, 0.456, 0.406]
+   std  = [0.229, 0.224, 0.225]
+
+การใช้ letterbox สำคัญเพราะตัวอักษรไทยบางคู่แตกต่างกันที่สัดส่วนและตำแหน่งของ
+เส้นขนาดเล็ก การยืดภาพอาจทำลายข้อมูลส่วนนี้
+
+
+6. เทคนิคที่ใช้ระหว่างฝึก
+-------------------------
+6.1 Transfer Learning
+ใช้ feature extractor ของ MobileNetV3-Large ที่เรียนรู้จาก ImageNet แล้วเปลี่ยน
+classifier ชั้นสุดท้ายให้มี 80 outputs
+
+6.2 Two-stage Fine-tuning
+
+Stage 1: Classifier warm-up
+- Freeze feature extractor
+- ฝึก classifier ใหม่
+- Epochs: 3
+- Optimizer: AdamW
+- Learning rate: 1e-3
+- Weight decay: 1e-4
+
+Stage 2: Backbone fine-tuning
+- Unfreeze feature extractor
+- Backbone learning rate: 1e-5
+- Classifier learning rate: 1e-4
+- Maximum epochs: 12
+- Optimizer: AdamW
+- Weight decay: 1e-4
+
+6.3 Class-weighted loss
+คำนวณน้ำหนักคลาสจาก Train เท่านั้น เพื่อช่วยลดผลกระทบจากจำนวนภาพแต่ละคลาส
+ที่ไม่เท่ากัน
+
+6.4 Label smoothing
+- ค่า label smoothing: 0.10
+- ลดความมั่นใจเกินจริงของโมเดล โดยเฉพาะคลาสตัวอักษรที่มีรูปร่างใกล้กัน
+
+6.5 Mixed precision
+ใช้ float16 บน GPU ระหว่าง forward pass เพื่อให้ฝึกเร็วขึ้นและใช้ VRAM ลดลง
+
+6.6 Gradient clipping
+- Maximum gradient norm: 5.0
+- ช่วยลดความเสี่ยงจาก gradient ที่มีค่าสูงผิดปกติ
+
+6.7 Learning-rate scheduler
+- ReduceLROnPlateau
+- ลด learning rate เมื่อ Validation Loss ไม่ดีขึ้น
+
+6.8 Early stopping
+- Stage 1 patience: 2 epochs
+- Stage 2 patience: 4 epochs
+- Checkpoint ถูกบันทึกเมื่อ Validation Accuracy ทำสถิติใหม่
+
+
+7. ผลการทดลองอ้างอิง
+---------------------
+ผลจาก notebook ที่ฝึกจริง:
+
+Stage 1 หลัง epoch 3
+- Train Accuracy: 91.07%
+- Validation Accuracy: 91.13%
+
+หลัง Fine-tuning
+- Best Validation Accuracy: 99.54%
+
+Mock Test 5%
+- Accuracy: 99.50%
+- Balanced Accuracy: 99.07%
+- Macro F1-score: 0.9885
+- Weighted F1-score: 0.9950
+- จำนวนภาพ: 12,749
+
+ข้อควรระวัง: Mock Test ถูกสุ่มมาจาก Validation เดิม จึงใช้ตรวจ inference
+pipeline เท่านั้น ห้ามรายงานเป็นคะแนน Test จริงของอาจารย์ และห้ามใช้ผล Mock
+Test เพื่อปรับ hyperparameters เพิ่มเติม
+
+
+8. รายละเอียดไฟล์ Checkpoint
+----------------------------
+ไฟล์:
+
+  mobilenetv3_large_best.pt
+
+Checkpoint มีข้อมูลหลักดังนี้:
+
+- model_state_dict: น้ำหนักของ MobileNetV3-Large
+- class_to_idx: mapping จากรหัสคลาส TIS-620 ไปยัง index 0-79
+- image_size: ขนาด input ที่ใช้ตอนฝึก
+- best_val_acc: Validation Accuracy สูงที่สุดตอนบันทึก
+
+ทีม Evaluation ต้องอ่าน class_to_idx จาก checkpoint โดยตรง ห้ามสร้างลำดับคลาส
+ใหม่จากการเดา เพราะ output index ที่สลับกันจะทำให้ผลทำนายผิดทั้งหมด
+
+
+9. ไฟล์ใน Evaluation Package
+----------------------------
+- person3_mobilenetv3_evaluation_colab.ipynb
+  ใช้ประเมินโมเดล สร้าง metrics และ confusion matrix
+
+- labels.csv
+  mapping ของ class id, TIS-620 code, ตัวอักษร และชื่อคลาส
+
+- model_card.json
+  สรุป model contract และผลอ้างอิงในรูปแบบ machine-readable
+
+- README.md
+  คู่มือเริ่มต้นแบบสั้น
+
+- PERSON3_MODEL_TO_EVALUATION.txt
+  เอกสารรายละเอียดฉบับนี้
+
+ไฟล์ checkpoint .pt ต้องส่งแยก หรือแชร์ผ่าน Google Drive เนื่องจากไม่ได้รวมอยู่
+ใน evaluation package
+
+
+10. วิธีใช้งาน Evaluation Mode
+------------------------------
+ไฟล์ที่ใช้:
+
+  person3_mobilenetv3_evaluation_colab.ipynb
+
+10.1 เตรียม Google Drive
+
+วาง checkpoint ไว้ที่ค่าเริ่มต้น:
+
+  /content/drive/MyDrive/dl/thai_char_person3_outputs/
+  mobilenetv3_large_best.pt
+
+วาง labels.csv ไว้ที่:
+
+  /content/drive/MyDrive/dl/person3_evaluation/labels.csv
+
+วาง Test ZIP ไว้ใน Drive หรือเลือกอัปโหลดจากเครื่องเมื่อ notebook ถาม
+
+10.2 เปิด Colab
+
+1) อัปโหลด person3_mobilenetv3_evaluation_colab.ipynb เข้า Google Colab
+2) เลือก Runtime > Change runtime type > T4 GPU
+3) ตรวจ MODEL_PATH ให้ชี้ไปยัง checkpoint
+4) ตั้ง TEST_ZIP_PATH หรือ TEST_FOLDER_PATH ให้ตรงกับชุด Test
+5) กด Runtime > Run all
+
+10.3 รูปแบบชุด Test ที่รองรับ
+
+- ZIP ที่มีภาพอยู่ในโฟลเดอร์เดียว
+- ZIP ที่มีโฟลเดอร์ซ้อนหลายระดับ
+- โฟลเดอร์ใน Google Drive
+- ภาพนามสกุล jpg, jpeg, png, bmp, tif, tiff และ webp
+
+Notebook ค้นหารูปแบบ recursive และข้ามไฟล์ __MACOSX หรือ metadata ที่ไม่ใช่ภาพ
+
+10.4 กรณีชุด Test มีเฉลย
+
+Notebook รองรับ:
+
+- ground_truth.csv ที่มีคอลัมน์ filename และ class/tis620/label
+- โครงสร้างโฟลเดอร์ <class>/image.jpg
+
+เมื่อมีเฉลย Notebook จะคำนวณ:
+
+- Accuracy
+- Balanced Accuracy
+- Macro F1-score
+- Weighted F1-score
+- Precision/Recall/F1 รายคลาส
+- Confusion Matrix
+- Top confused class pairs
+- เวลา inference และ images per second
+
+10.5 กรณีชุด Test ไม่มีเฉลย
+
+Notebook จะสร้าง predictions.csv แต่ไม่คำนวณ metrics ซึ่งเป็นพฤติกรรมที่ถูกต้อง
+สำหรับ Test จริงที่ซ่อน label
+
+
+11. ไฟล์ผลลัพธ์จาก Evaluation Mode
+----------------------------------
+ค่าเริ่มต้นจะบันทึกไว้ที่:
+
+  /content/drive/MyDrive/dl/evaluation_results/person3_mobilenetv3/
+
+ไฟล์ที่ได้:
+
+- predictions.csv
+  ผลทำนายทุกภาพ สร้างเสมอ
+
+- evaluation_summary.json
+  สรุปชื่อโมเดล hash ของ checkpoint ขนาดโมเดล เวลา inference และ metrics
+
+- classification_report.csv
+  Precision, Recall และ F1-score รายคลาส เมื่อมี ground truth
+
+- scored_predictions.csv
+  ผลทำนายรายภาพพร้อม true class และสถานะ correct/incorrect
+
+- confusion_matrix.png
+  Confusion Matrix สำหรับใช้วิเคราะห์และใส่รายงาน
+
+- top_confusions.csv
+  คู่คลาสที่โมเดลทำนายสับสนบ่อยที่สุด
+
+
+12. วิธีสร้าง Submission สำหรับ Test จริง
+------------------------------------------
+ใช้ไฟล์:
+
+  person3_mobilenetv3_submission_colab.ipynb
+
+Notebook นี้ไม่มีโค้ดฝึก ไม่มี ground truth และไม่คำนวณ metrics ทำหน้าที่โหลด
+checkpoint ทำนาย Test ของอาจารย์ และสร้าง:
+
+- submission.csv
+  คอลัมน์ filename และ prediction โดย prediction เป็นรหัส TIS-620
+
+- submission_detailed.csv
+  มี relative path, class id, TIS-620, ตัวอักษร, ชื่อคลาส และ confidence
+
+ก่อนส่งต้องตรวจรูปแบบตัวอย่าง submission ของอาจารย์ หากชื่อคอลัมน์หรือรูปแบบ
+label แตกต่างกัน ให้เปลี่ยนเฉพาะขั้นตอนสร้าง submission โดยไม่แก้ preprocessing
+หรือโมเดล
+
+
+13. กติกาการ Evaluation ที่แนะนำสำหรับทั้ง 3 โมเดล
+---------------------------------------------------
+1) ใช้ Test images ชุดเดียวกัน
+2) ใช้ ground truth ชุดเดียวกัน
+3) ห้าม augment Test
+4) แต่ละโมเดลต้องใช้ preprocessing ของตัวเองตามที่ฝึก
+5) ใช้ class mapping จาก checkpoint ของแต่ละโมเดล
+6) รัน Test หลังจากล็อกโมเดลแล้ว
+7) ห้ามนำ Test metrics กลับไปปรับโมเดลหรือ hyperparameters
+8) รายงาน Accuracy เป็น metric หลักตามเกณฑ์อาจารย์
+9) รายงาน Macro F1 และ Balanced Accuracy เพิ่ม เนื่องจากข้อมูลไม่สมดุล
+10) เก็บ predictions และ checkpoint hash เพื่อให้ตรวจสอบซ้ำได้
+
+เกณฑ์จัดอันดับที่แนะนำ:
+
+1) Test Accuracy
+2) Macro F1-score เมื่อ Accuracy ใกล้กัน
+3) Balanced Accuracy
+4) Recall ของคลาสที่มีข้อมูลน้อย
+5) Model size และ inference speed
+
+
+14. Troubleshooting
+-------------------
+ปัญหา: ไม่พบ checkpoint
+- ตรวจว่า Mount Drive แล้ว
+- ตรวจ MODEL_PATH และตัวพิมพ์เล็ก/ใหญ่ของชื่อไฟล์
+
+ปัญหา: ไม่พบ Test ZIP หรือ Test folder
+- ตรวจ TEST_ZIP_PATH.exists() และ TEST_FOLDER_PATH.exists()
+- หากไม่พบใน Drive ให้ใช้งาน upload fallback ใน notebook
+
+ปัญหา: ไม่พบภาพหลังแตก ZIP
+- เปิดดูโครงสร้าง ZIP
+- ตรวจนามสกุลภาพ
+- ตรวจว่า ZIP ไม่ได้เสียหาย
+
+ปัญหา: คะแนนต่ำผิดปกติ
+- ตรวจ image size ต้องเป็น 160 x 160
+- ตรวจว่าใช้ white letterbox ไม่ใช่ stretch
+- ตรวจ ImageNet mean/std
+- ตรวจ class_to_idx จาก checkpoint
+- ตรวจว่าโหลด mobilenetv3_large ไม่ใช่ mobilenetv3_small
+
+ปัญหา: CUDA out of memory
+- ลด batch size จาก 128 เป็น 64 หรือ 32
+
+ปัญหา: ชื่อไฟล์ซ้ำ
+- ใช้ relative_path แทน basename ใน predictions/submission
+
+
+15. Handoff Checklist
+---------------------
+[/] ส่ง mobilenetv3_large_best.pt
+[/] ส่ง person3_mobilenetv3_evaluation_colab.ipynb
+[/] ส่ง person3_mobilenetv3_submission_colab.ipynb เมื่อต้องสร้าง submission
+[/] ส่ง labels.csv
+[/] ยืนยัน MODEL_PATH
+[/] ยืนยัน input size = 160
+[/] ยืนยัน class count = 80
+[/] ยืนยัน class mapping จาก checkpoint
+[ ] ยืนยันว่า Test ไม่ถูกใช้ระหว่างฝึกหรือปรับโมเดล
+[ ] เก็บ evaluation_summary.json และ predictions.csv หลังประเมิน
+
+END OF DOCUMENT

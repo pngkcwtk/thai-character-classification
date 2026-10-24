@@ -1,0 +1,32 @@
+# Local datasets, downloads, checkpoints and historical exports
+/data/local/
+/archives/
+/archive_local/
+/models/*
+!/models/README.md
+/assets/fonts/
+/notebooks/legacy/
+/results/submissions/
+*.zip
+*.pt
+*.pth
+*.ckpt
+*.ttf
+*.otf
+# Python and notebook runtime files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+# OS and editor files
+.DS_Store
+__MACOSX/
+._*
+Thumbs.db
+.idea/
+.vscode/
